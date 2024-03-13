@@ -1,0 +1,9 @@
+node_modules/
+*.md
+.next/
+build/
+dist/
+out/
+public/
+package-lock.json
+next.config.js
