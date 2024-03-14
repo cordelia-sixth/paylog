@@ -1,47 +1,37 @@
 "use client";
 
 import { firebaseAuth } from "@/lib/firebase";
-import {
-  GoogleAuthProvider,
-  User,
-  onAuthStateChanged,
-  signInWithPopup,
-} from "firebase/auth";
+import { User, onAuthStateChanged } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
-
-const AuthContext = createContext<User | undefined>(undefined);
 
 type Props = {
   children: React.ReactNode;
 };
 
+type AuthUser = User | null | undefined;
+
+const AuthContext = createContext<AuthUser>(null);
+
 /**
  * ログインユーザーのコンテキスト
- * @param param0
  */
 export const AuthProvider = ({ children }: Props) => {
-  const [sessionUser, setSessionUser] = useState<User | undefined>(undefined);
+  const [loginUser, setLogiuUser] = useState<AuthUser>(null);
 
   useEffect(() => {
-    // google認証情報が変更されてないかリッスンする
     const unsubscribe = onAuthStateChanged(firebaseAuth, (currentUser) => {
       if (!currentUser) {
-        return;
+        setLogiuUser(null);
       }
-      setSessionUser(currentUser);
-      return () => unsubscribe();
+      setLogiuUser(currentUser);
     });
-  }, [sessionUser]);
 
-  // google認証ポップアップ
-  const googleSignin = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(firebaseAuth, provider);
-  };
+    return () => unsubscribe();
+  }, []);
 
   return (
-    <AuthContext.Provider value={sessionUser}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={loginUser}>{children}</AuthContext.Provider>
   );
 };
 
-export const useSessionUser = () => useContext(AuthContext);
+export const useAuthContext = () => useContext(AuthContext);

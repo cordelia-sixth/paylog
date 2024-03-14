@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_APP_ID,
+  apiKey: "AIzaSyBWuOL2z7W1JMz-hOeQA0pdRHkoeovU_3c",
+  authDomain: "paylog-c39d5.firebaseapp.com",
+  projectId: "paylog-c39d5",
+  storageBucket: "paylog-c39d5.appspot.com",
+  messagingSenderId: "513537333879",
+  appId: "1:513537333879:web:ee7f55b1ef16dd03990472",
 };
 
 const app = initializeApp(firebaseConfig);

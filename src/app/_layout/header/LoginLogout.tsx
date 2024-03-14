@@ -1,7 +1,54 @@
+"use client";
+
+import { firebaseAuth } from "@/lib/firebase";
+import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { useAuthContext } from "../provider/AuthProvider";
+import { useRouter } from "next/navigation";
+
+/**
+ * ログイン・ログアウトボタンを表示するコンポーネント
+ * @returns button
+ */
 export const LoginLogout = () => {
+  const router = useRouter();
+  const loginUser = useAuthContext();
+
+  const login = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(firebaseAuth, provider);
+      router.push("/home");
+    } catch (error) {
+      console.log(error);
+      // TODO: エラーメッセージをトーストで表示
+      router.push("/");
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await signOut(firebaseAuth);
+    } catch (error) {
+      console.log(error);
+      // TODO: エラーメッセージをトーストで表示
+    } finally {
+      router.push("/");
+    }
+  };
+
+  console.log(loginUser);
+
   return (
     <>
-      <h1>Login Logout</h1>
+      {!loginUser ? (
+        <button onClick={login} className="border px-4 py-2">
+          Login
+        </button>
+      ) : (
+        <button onClick={logout} className="border px-4 py-2">
+          Logout
+        </button>
+      )}
     </>
   );
 };
