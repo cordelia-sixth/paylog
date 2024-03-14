@@ -2,8 +2,8 @@
 
 import { firebaseAuth } from "@/lib/firebase";
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { useAuthContext } from "../provider/AuthProvider";
 import { useRouter } from "next/navigation";
+import { useAuthContext } from "../provider/AuthProvider";
 
 /**
  * ログイン・ログアウトボタンを表示するコンポーネント
