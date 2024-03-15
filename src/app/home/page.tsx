@@ -13,14 +13,15 @@ import {
   query,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { ItemInput } from "./_components/ItemInput";
 
-type Item = {
+export type Item = {
   /** アイテムID */
-  id: string;
+  id?: string | undefined;
   /** アイテム名 */
-  name: string;
+  name: string | undefined;
   /** 金額 */
-  price: string;
+  price: string | undefined;
 };
 
 const Page = () => {
@@ -52,7 +53,7 @@ const Page = () => {
   return (
     <>
       <h1>Home page</h1>
-      {/* Input */}
+      <ItemInput />
       {/* Input */}
       {/* Input */}
     </>
