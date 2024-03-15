@@ -4,6 +4,8 @@ import { firebaseAuth } from "@/lib/firebase";
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "../provider/AuthProvider";
+import { IoLogInOutline } from "react-icons/io5";
+import { IoLogOutOutline } from "react-icons/io5";
 
 /**
  * ログイン・ログアウトボタンを表示するコンポーネント
@@ -39,12 +41,14 @@ export const LoginLogout = () => {
   return (
     <>
       {!loginUser ? (
-        <button onClick={login} className="border px-4 py-2">
+        <button onClick={login} className="flex items-center gap-1">
           Login
+          <IoLogInOutline size={25} />
         </button>
       ) : (
-        <button onClick={logout} className="border px-4 py-2">
+        <button onClick={logout} className="flex items-center gap-1">
           Logout
+          <IoLogOutOutline size={25} />
         </button>
       )}
     </>
