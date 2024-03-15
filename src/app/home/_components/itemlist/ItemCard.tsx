@@ -1,6 +1,7 @@
 import { deleteDoc, doc } from "firebase/firestore";
 import { Item } from "../../page";
 import { firebaseStore } from "@/lib/firebase";
+import { formatPrice } from "../utils";
 
 /**
  * アイテム情報を受け取って表示するコンポーネント
@@ -16,7 +17,9 @@ export const ItemCard = ({ id, name, price }: Item) => {
       <li>
         <div className="grid grid-cols-4 grid-rows-1 gap-2 p-2">
           <span className="col-span-2 border">{name}</span>
-          <span className="col-start-3 border">{price}</span>
+          <span className="col-start-3 border">
+            {formatPrice(Number(price))}
+          </span>
           <button
             className="col-start-4 border"
             onClick={() => handleClick(id)}

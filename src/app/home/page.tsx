@@ -1,21 +1,11 @@
 "use client";
 
 import { firebaseStore } from "@/lib/firebase";
-import {
-  DocumentData,
-  DocumentSnapshot,
-  QueryDocumentSnapshot,
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  onSnapshot,
-  query,
-} from "firebase/firestore";
+import { collection, onSnapshot, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { ItemInput } from "./_components/ItemInput";
 import { ItemList } from "./_components/itemlist";
+import { Total } from "./_components/Total";
 
 export type Item = {
   /** アイテムID */
@@ -27,7 +17,6 @@ export type Item = {
 };
 
 const Page = () => {
-  const [inputItem, setInputItem] = useState();
   const [itemList, setItemList] = useState<Item[]>([]);
 
   useEffect(() => {
@@ -57,7 +46,7 @@ const Page = () => {
       <h1>Home page</h1>
       <ItemInput />
       <ItemList itemList={itemList} />
-      {/* Input */}
+      <Total itemList={itemList} />
       {/* Input */}
     </>
     // <div className="h-svh">
