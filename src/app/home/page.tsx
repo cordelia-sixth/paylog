@@ -3,7 +3,8 @@
 import { firebaseStore } from "@/lib/firebase";
 import {
   DocumentData,
-  QuerySnapshot,
+  DocumentSnapshot,
+  QueryDocumentSnapshot,
   addDoc,
   collection,
   deleteDoc,
@@ -14,28 +15,29 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { ItemInput } from "./_components/ItemInput";
+import { ItemList } from "./_components/itemlist";
 
 export type Item = {
   /** アイテムID */
-  id?: string | undefined;
+  id: string;
   /** アイテム名 */
-  name: string | undefined;
+  name: string;
   /** 金額 */
-  price: string | undefined;
+  price: string;
 };
 
 const Page = () => {
   const [inputItem, setInputItem] = useState();
-  const [itemList, setItemList] = useState<Item[] | undefined>();
+  const [itemList, setItemList] = useState<Item[]>([]);
 
   useEffect(() => {
-    const q = query(collection(firebaseStore, "item"));
+    const q = query(collection(firebaseStore, "items"));
 
     const unsubscribe = onSnapshot(
       q,
-      (QuerySnapshot) => {
+      (snapshot) => {
         let items: Item[] = [];
-        QuerySnapshot.forEach((doc) => {
+        snapshot.forEach((doc) => {
           const { name, price } = doc.data();
           items.push({ id: doc.id, name, price });
         });
@@ -54,6 +56,7 @@ const Page = () => {
     <>
       <h1>Home page</h1>
       <ItemInput />
+      <ItemList itemList={itemList} />
       {/* Input */}
       {/* Input */}
     </>
