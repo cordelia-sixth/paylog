@@ -4,11 +4,11 @@ import { ItemCard } from "./ItemCard";
 /**
  * アイテムを表示するコンポーネント
  */
-export const ItemList = ({ itemList }: any) => {
+export const ItemList = ({ itemList }: { itemList: Item[] }) => {
   return (
     <>
-      {itemList.map((item: Item) => {
-        return <ItemCard key={item.id} {...item} />;
+      {itemList.map((item, id) => {
+        return <ItemCard key={id} {...item} />;
       })}
     </>
   );

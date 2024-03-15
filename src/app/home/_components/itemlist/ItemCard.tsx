@@ -8,7 +8,7 @@ import { formatPrice } from "../utils";
  */
 export const ItemCard = ({ id, name, price }: Item) => {
   // TODO: パラメータ型修正
-  const handleClick = async (id) => {
+  const handleClick = async (id: string) => {
     await deleteDoc(doc(firebaseStore, "items", id));
   };
 
