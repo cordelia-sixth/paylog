@@ -36,8 +36,6 @@ export const LoginLogout = () => {
     }
   };
 
-  console.log(loginUser);
-
   return (
     <>
       {!loginUser ? (
