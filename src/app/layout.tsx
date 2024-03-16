@@ -4,6 +4,7 @@ import { Footer } from "./_layout/footer";
 import { Header } from "./_layout/header";
 import { Container } from "./_layout/container";
 import { AuthProvider } from "./_layout/provider/AuthProvider";
+import { Main } from "./_layout/Main";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,11 +18,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className="">
+      <body>
         <AuthProvider>
-          <Header />
-          <Container>{children}</Container>
-          <Footer />
+          <Container>
+            <Header />
+            <Main>{children}</Main>
+            <Footer />
+          </Container>
         </AuthProvider>
       </body>
     </html>
