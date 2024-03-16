@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Footer = () => {
   return (
-    <footer className="jusc flex items-start justify-between py-5">
+    <footer className="flex items-start justify-between py-5">
       <p>&copy; PayLog</p>
       <Link href="https://cordelia.dev" className="flex gap-1">
         Created by

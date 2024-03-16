@@ -44,7 +44,7 @@ export const ItemInput = () => {
         name="name"
         value={item.name}
         placeholder="買い物"
-        className="col-span-4 h-[46px] rounded-md bg-slate-100 px-2"
+        className="col-span-4 h-[88%] rounded-md bg-slate-100 p-2"
         onChange={handleChange}
       />
       <input
@@ -52,13 +52,13 @@ export const ItemInput = () => {
         name="price"
         value={item.price}
         placeholder="1000"
-        className="col-span-3 h-[46px] rounded-md bg-slate-100 px-2"
+        className="col-span-3 h-[88%] rounded-md bg-slate-100 p-2"
         onChange={handleChange}
       />
-      <button type="submit" className="col-span-1 -ml-[3px]">
+      <button type="submit" className="col-span-1 h-full">
         {/* <IoIosAddCircleOutline size={56} color="#ffffff" /> */}
         {/* <FaCirclePlus size={47} color="#ffffff" /> */}
-        <FaPlusSquare size={40} color="#ffffff" />
+        <FaPlusSquare color="#ffffff" className="size-full" />
       </button>
     </form>
   );

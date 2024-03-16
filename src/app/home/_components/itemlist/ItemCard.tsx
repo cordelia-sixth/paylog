@@ -14,7 +14,7 @@ export const ItemCard = ({ id, name, price }: Item) => {
   };
 
   return (
-    <div className="flex w-full justify-between rounded-3xl bg-slate-100 p-2">
+    <div className="flex w-full justify-between rounded-xl bg-slate-100 p-2">
       <div className="flex w-full items-center justify-between gap-4 overflow-y-hidden">
         <p className="max-w-[60%] overflow-y-auto whitespace-nowrap p-2">
           {name}
