@@ -1,9 +1,10 @@
 import { FormEvent, useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
-import { firebaseStore } from "@/lib/firebase";
+
 // import { IoIosAddCircleOutline } from "react-icons/io";
 import { FaCirclePlus } from "react-icons/fa6";
 import { FaPlusSquare } from "react-icons/fa";
+import { firebaseStore } from "@/lib/firebase/client";
 
 /**
  * 購入物と金額を入力するコンポーネント
@@ -56,8 +57,6 @@ export const ItemInput = () => {
         onChange={handleChange}
       />
       <button type="submit" className="col-span-1 h-full">
-        {/* <IoIosAddCircleOutline size={56} color="#ffffff" /> */}
-        {/* <FaCirclePlus size={47} color="#ffffff" /> */}
         <FaPlusSquare color="#ffffff" className="size-full" />
       </button>
     </form>

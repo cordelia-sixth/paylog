@@ -1,11 +1,12 @@
 "use client";
 
-import { firebaseAuth } from "@/lib/firebase";
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { useAuthContext } from "../provider/AuthProvider";
+
 import { IoLogInOutline } from "react-icons/io5";
 import { IoLogOutOutline } from "react-icons/io5";
+import { firebaseAuth } from "@/lib/firebase/client";
+import { useAuthContext } from "../provider/AuthProvider";
 
 /**
  * ログイン・ログアウトボタンを表示するコンポーネント
@@ -40,7 +41,7 @@ export const LoginLogout = () => {
 
   return (
     <>
-      {!loginUser ? (
+      {loginUser === undefined ? null : loginUser === null ? (
         <button onClick={login} className="flex items-center gap-1">
           Login
           <IoLogInOutline size={25} />

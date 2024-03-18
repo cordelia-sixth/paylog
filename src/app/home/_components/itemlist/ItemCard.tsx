@@ -1,8 +1,9 @@
 import { deleteDoc, doc } from "firebase/firestore";
 import { Item } from "../../page";
-import { firebaseStore } from "@/lib/firebase";
+
 import { formatPrice } from "../utils";
 import { MdDeleteOutline } from "react-icons/md";
+import { firebaseStore } from "@/lib/firebase/client";
 
 /**
  * アイテム情報を受け取って表示するコンポーネント
