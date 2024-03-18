@@ -1,33 +1,56 @@
 "use client";
 
-import { firebaseAuth } from "@/lib/firebase";
-import { User, onAuthStateChanged } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
+import { LoginUser } from "./type";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "@/lib/firebase/client";
 
-type Props = {
-  children: React.ReactNode;
-};
+/** contextの型 */
+export type AuthContextType =
+  /** 現在のログインユーザー */
+  | LoginUser
+  /** ユーザーなし */
+  | null
+  /** 初期値及び、取得中 */
+  | undefined;
 
-type AuthUser = User | null | undefined;
-
-const AuthContext = createContext<AuthUser>(null);
+// contextを作成
+const AuthContext = createContext<AuthContextType>(undefined);
 
 /**
- * ログインユーザーのコンテキスト
+ * ログインユーザーを提供するcontext
+ * @param children 子コンポーネント
+ * @returns Context provider
  */
-export const AuthProvider = ({ children }: Props) => {
-  const [loginUser, setLogiuUser] = useState<AuthUser>(null);
+export const AuthContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [loginUser, setLoginUser] = useState<AuthContextType>(undefined);
 
+  // レンダリング時に1回だけ起動する
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(firebaseAuth, (currentUser) => {
       if (!currentUser) {
-        setLogiuUser(null);
+        setLoginUser(null);
+      } else {
+        const user = {
+          id: currentUser.uid,
+          name: currentUser.displayName!,
+          photoUrl: currentUser.photoURL!,
+          email: currentUser.email!,
+          createdAt: Date.now(),
+        };
+        setLoginUser(user);
       }
-      setLogiuUser(currentUser);
     });
 
+    // アンマウント時に停止する
     return () => unsubscribe();
   }, []);
+
+  console.log(loginUser);
 
   return (
     <AuthContext.Provider value={loginUser}>{children}</AuthContext.Provider>
