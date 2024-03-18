@@ -26,7 +26,7 @@ const Page = () => {
     router.push("/");
   }
 
-  const [itemList, setItemList] = useState<Item[]>([]);
+  const [itemList, setItemList] = useState<Item[] | undefined>(undefined);
 
   useEffect(() => {
     const q = query(collection(firebaseStore, "items"));
@@ -53,11 +53,17 @@ const Page = () => {
     <>
       {loginUser === undefined || loginUser === null ? null : (
         <>
-          <StyleComponent className="flex flex-col gap-3 rounded-xl bg-blue-600 p-4">
-            <Total itemList={itemList} />
-            <ItemInput />
-          </StyleComponent>
-          <ItemList itemList={itemList} />
+          {itemList === undefined ? (
+            <Loading />
+          ) : (
+            <>
+              <StyleComponent className="flex flex-col gap-3 rounded-xl bg-blue-600 p-4">
+                <Total itemList={itemList} />
+                <ItemInput />
+              </StyleComponent>
+              <ItemList itemList={itemList} />
+            </>
+          )}
         </>
       )}
     </>
@@ -65,3 +71,15 @@ const Page = () => {
 };
 
 export default Page;
+
+const Loading = () => {
+  return (
+    <div className="w-full rounded-xl border border-blue-300 bg-slate-400 p-4 shadow">
+      <div className="flex animate-pulse flex-col gap-2">
+        <div className="h-5 w-16 rounded-xl bg-slate-700"></div>
+        <div className="h-8 w-20 rounded-xl bg-slate-700"></div>
+        <div className="h-12 w-full rounded-xl bg-slate-700"></div>
+      </div>
+    </div>
+  );
+};

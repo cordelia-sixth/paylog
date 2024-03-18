@@ -8,6 +8,7 @@ export const Total = ({ itemList }: { itemList: Item[] }) => {
   const total = itemList.reduce((prev, item) => {
     return prev + Number(item.price);
   }, 0);
+
   return (
     <div className="overflow-y-auto">
       <p className="pl-[3px] text-slate-300/[.8]">Total</p>
