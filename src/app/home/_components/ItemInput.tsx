@@ -11,7 +11,7 @@ import { firebaseStore } from "@/lib/firebase/client";
  */
 export const ItemInput = () => {
   // TODO: ここ型付できない？
-  const initState = { name: "", price: "" };
+  const initState = { name: "", price: "", createdAt: 0 };
   const [item, setItem] = useState(initState);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -30,6 +30,7 @@ export const ItemInput = () => {
     if (item.name !== "" && item.price !== "") {
       await addDoc(collection(firebaseStore, "items"), {
         ...item,
+        createdAt: Date.now(),
       });
       setItem(initState);
     }

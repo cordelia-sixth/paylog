@@ -13,6 +13,22 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      // カスタムアニメーション
+      keyframes: {
+        appear: {
+          "0%": { opacity: "0", transform: "translateY(-15px)" },
+          "50%": { opacity: "0", transform: "translateY(-10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        disappear: {
+          "0%": { opacity: "1", transform: "translateY(0)" },
+          "100%": { opacity: "0", transform: "translateY(-15px)" },
+        },
+      },
+      animation: {
+        appear: "appear 1s ease-in-out 0s 1 normal forwards",
+        disappear: "disappear 1s ease-in-out 0s 1 normal forwards",
+      },
     },
   },
   plugins: [],

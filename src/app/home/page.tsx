@@ -1,6 +1,6 @@
 "use client";
 
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { ItemInput } from "./_components/ItemInput";
 import { ItemList } from "./_components/itemlist";
@@ -17,6 +17,8 @@ export type Item = {
   name: string;
   /** 金額 */
   price: string;
+  /** 日付 */
+  createdAt: number;
 };
 
 const Page = () => {
@@ -29,14 +31,17 @@ const Page = () => {
   const [itemList, setItemList] = useState<Item[] | undefined>(undefined);
 
   useEffect(() => {
-    const q = query(collection(firebaseStore, "items"));
+    const q = query(
+      collection(firebaseStore, "items"),
+      orderBy("createdAt", "desc"),
+    );
     const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
         let items: Item[] = [];
         snapshot.forEach((doc) => {
-          const { name, price } = doc.data();
-          items.push({ id: doc.id, name, price });
+          const { name, price, createdAt } = doc.data();
+          items.push({ id: doc.id, name, price, createdAt });
         });
         setItemList(items);
       },
