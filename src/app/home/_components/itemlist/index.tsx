@@ -7,8 +7,8 @@ import { ItemCard } from "./ItemCard";
 export const ItemList = ({ itemList }: { itemList: Item[] }) => {
   return (
     <div className="flex flex-col gap-3">
-      {itemList.map((item, id) => {
-        return <ItemCard key={id} {...item} />;
+      {itemList.map((item) => {
+        return <ItemCard key={item.id} {...item} />;
       })}
     </div>
   );

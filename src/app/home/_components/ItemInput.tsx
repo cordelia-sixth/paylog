@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 
 // import { IoIosAddCircleOutline } from "react-icons/io";
@@ -13,16 +13,18 @@ export const ItemInput = () => {
   // TODO: ここ型付できない？
   const initState = { name: "", price: "", createdAt: 0 };
   const [item, setItem] = useState(initState);
+  const focusElm = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault();
     const value = e.currentTarget.value.trim();
     const key = e.currentTarget.name;
-
     setItem((prev) => ({
       ...prev,
       [key]: value,
     }));
+
+    focusElm.current?.focus();
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -48,6 +50,7 @@ export const ItemInput = () => {
         placeholder="買い物"
         className="col-span-4 h-[88%] rounded-md bg-slate-100 p-2"
         onChange={handleChange}
+        ref={focusElm}
       />
       <input
         type="number"

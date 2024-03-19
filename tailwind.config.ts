@@ -17,7 +17,6 @@ const config: Config = {
       keyframes: {
         appear: {
           "0%": { opacity: "0", transform: "translateY(-15px)" },
-          "50%": { opacity: "0", transform: "translateY(-10px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         disappear: {
@@ -27,7 +26,7 @@ const config: Config = {
       },
       animation: {
         appear: "appear 1s ease-in-out 0s 1 normal forwards",
-        disappear: "disappear 1s ease-in-out 0s 1 normal forwards",
+        disappear: "disappear 0.5s ease-in-out 0s 1 normal forwards",
       },
     },
   },
