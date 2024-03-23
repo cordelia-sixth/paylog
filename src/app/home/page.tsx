@@ -19,11 +19,13 @@ export type Item = {
   price: string;
   /** 日付 */
   createdAt: number;
+  /** ユーザーID */
+  userId: string;
 };
 
 const Page = () => {
-  const loginUser = useAuthContext();
   const router = useRouter();
+  const loginUser = useAuthContext();
   if (loginUser === null) {
     router.push("/");
   }
@@ -32,7 +34,7 @@ const Page = () => {
 
   useEffect(() => {
     const q = query(
-      collection(firebaseStore, "items"),
+      collection(firebaseStore, String(loginUser?.id)),
       orderBy("createdAt", "desc"),
     );
     const unsubscribe = onSnapshot(
@@ -40,8 +42,14 @@ const Page = () => {
       (snapshot) => {
         let items: Item[] = [];
         snapshot.forEach((doc) => {
-          const { name, price, createdAt } = doc.data();
-          items.push({ id: doc.id, name, price, createdAt });
+          const { name, price, createdAt, userId } = doc.data();
+          items.push({
+            id: doc.id,
+            name,
+            price,
+            createdAt,
+            userId,
+          });
         });
         setItemList(items);
       },
@@ -52,7 +60,7 @@ const Page = () => {
     );
 
     return () => unsubscribe();
-  }, []);
+  }, [loginUser]);
 
   return (
     <>
@@ -62,7 +70,7 @@ const Page = () => {
             <Loading />
           ) : (
             <>
-              <StyleComponent className="flex flex-col gap-3 rounded-xl bg-blue-600 p-4">
+              <StyleComponent className="flex flex-col gap-3 rounded-xl bg-blue-600 p-4 shadow-custom">
                 <Total itemList={itemList} />
                 <ItemInput />
               </StyleComponent>

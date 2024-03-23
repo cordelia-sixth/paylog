@@ -1,20 +1,20 @@
-import Link from "next/link";
+"use client";
+
 import { LoginLogout } from "./LoginLogout";
-import { PiCoinVertical } from "react-icons/pi";
 import { FaCoins } from "react-icons/fa6";
-import { LiaCoinsSolid } from "react-icons/lia";
+import { useAuthContext } from "../provider/AuthProvider";
 
 export const Header = () => {
+  const user = useAuthContext();
+
   return (
     <header className="flex items-center justify-between py-5">
-      <Link
-        href="/"
-        className="flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1 text-white"
-      >
+      <div className="flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1 text-white">
         Pay
-        <FaCoins />
+        <FaCoins size={18} />
         Log
-      </Link>
+      </div>
+      {!user ? null : user.name}
       <LoginLogout />
     </header>
   );

@@ -42,7 +42,7 @@ export const LoginLogout = () => {
   return (
     <>
       {loginUser === undefined ? null : loginUser === null ? (
-        <button onClick={login} className="flex items-center gap-1">
+        <button onClick={() => login()} className="flex items-center gap-1">
           Login
           <IoLogInOutline size={25} />
         </button>
