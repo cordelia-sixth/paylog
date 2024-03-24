@@ -1,11 +1,11 @@
-import { collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { Item } from "../../page";
 import { formatPrice, formatTime } from "../utils";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { TiDelete } from "react-icons/ti";
 import { firebaseStore } from "@/lib/firebase/client";
-import { FormEvent, SyntheticEvent, memo, useRef, useState } from "react";
+import { FormEvent, memo, useRef, useState } from "react";
 import { useDialog } from "../modal/dialog";
 
 /**
@@ -21,13 +21,13 @@ export const ItemCard = memo(({ id, name, price, createdAt, userId }: Item) => {
     divRef.current?.classList.remove("animate-appear");
     divRef.current?.classList.add("animate-disappear");
     await new Promise((resolve) => setTimeout(resolve, 700));
-    await deleteDoc(doc(firebaseStore, userId, id));
+    await deleteDoc(doc(firebaseStore, `users/${userId}/items/`, id));
   };
 
   // daialog
   const handleUpdate = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await updateDoc(doc(firebaseStore, userId, id), {
+    await updateDoc(doc(firebaseStore, `users/${userId}/items/`, id), {
       ...item,
     });
     handleClose();
@@ -55,7 +55,7 @@ export const ItemCard = memo(({ id, name, price, createdAt, userId }: Item) => {
           </button>
           <form
             className="flex flex-col justify-center gap-8"
-            onSubmit={(e) => handleUpdate(e)}
+            onSubmit={handleUpdate}
           >
             <label className="flex flex-col gap-2">
               買い物
@@ -64,6 +64,8 @@ export const ItemCard = memo(({ id, name, price, createdAt, userId }: Item) => {
                 value={item.name}
                 placeholder={name}
                 name="name"
+                maxLength={20}
+                required
                 onChange={handleChange}
                 className="rounded-md bg-slate-100 p-3 shadow-xl focus:outline-none focus:ring-4 focus:ring-red-600"
               />
@@ -75,6 +77,9 @@ export const ItemCard = memo(({ id, name, price, createdAt, userId }: Item) => {
                 value={item.price}
                 placeholder={price}
                 name="price"
+                min={1}
+                max={99999999}
+                required
                 onChange={handleChange}
                 className="rounded-md bg-slate-100 p-3 shadow-xl focus:outline-none focus:ring-4 focus:ring-red-600"
               />

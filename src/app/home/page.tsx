@@ -17,7 +17,7 @@ export type Item = {
   name: string;
   /** 金額 */
   price: string;
-  /** 日付 */
+  /** 作成日時 */
   createdAt: number;
   /** ユーザーID */
   userId: string;
@@ -27,14 +27,14 @@ const Page = () => {
   const router = useRouter();
   const loginUser = useAuthContext();
   if (loginUser === null) {
-    router.push("/");
+    router.push("/login");
   }
 
   const [itemList, setItemList] = useState<Item[] | undefined>(undefined);
 
   useEffect(() => {
     const q = query(
-      collection(firebaseStore, String(loginUser?.id)),
+      collection(firebaseStore, `users/${loginUser?.id}/items/`),
       orderBy("createdAt", "desc"),
     );
     const unsubscribe = onSnapshot(
@@ -42,13 +42,13 @@ const Page = () => {
       (snapshot) => {
         let items: Item[] = [];
         snapshot.forEach((doc) => {
-          const { name, price, createdAt, userId } = doc.data();
+          // const { name, price, createdAt } = doc.data();
           items.push({
+            ...(doc.data() as Item),
             id: doc.id,
-            name,
-            price,
-            createdAt,
-            userId,
+            // name,
+            // price,
+            // createdAt,
           });
         });
         setItemList(items);
@@ -62,37 +62,20 @@ const Page = () => {
     return () => unsubscribe();
   }, [loginUser]);
 
-  return (
-    <>
-      {loginUser === undefined || loginUser === null ? null : (
-        <>
-          {itemList === undefined ? (
-            <Loading />
-          ) : (
-            <>
-              <StyleComponent className="flex flex-col gap-3 rounded-xl bg-blue-600 p-4 shadow-custom">
-                <Total itemList={itemList} />
-                <ItemInput />
-              </StyleComponent>
-              <ItemList itemList={itemList} />
-            </>
-          )}
-        </>
-      )}
-    </>
-  );
+  if (!loginUser) return null;
+  if (itemList === undefined) {
+    return null;
+  } else {
+    return (
+      <>
+        <StyleComponent className="flex flex-col gap-3 rounded-xl bg-blue-600 p-4 shadow-custom">
+          <Total itemList={itemList} />
+          <ItemInput />
+        </StyleComponent>
+        <ItemList itemList={itemList} />
+      </>
+    );
+  }
 };
 
 export default Page;
-
-const Loading = () => {
-  return (
-    <div className="w-full rounded-xl border border-blue-300 bg-slate-400 p-4 shadow">
-      <div className="flex animate-pulse flex-col gap-2">
-        <div className="h-5 w-16 rounded-xl bg-slate-700"></div>
-        <div className="h-8 w-20 rounded-xl bg-slate-700"></div>
-        <div className="h-12 w-full rounded-xl bg-slate-700"></div>
-      </div>
-    </div>
-  );
-};

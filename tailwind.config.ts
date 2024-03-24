@@ -19,11 +19,13 @@ const config: Config = {
           "0%": {
             opacity: "0",
             transform: "translateY(-15px)",
+            height: "0",
             marginBottom: "0",
           },
           "100%": {
             opacity: "1",
             transform: "translateY(0)",
+            height: "88px",
             marginBottom: "15px",
           },
         },

@@ -1,6 +1,6 @@
 "use client";
 
-import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 import { IoLogInOutline } from "react-icons/io5";
@@ -16,21 +16,14 @@ export const LoginLogout = () => {
   const router = useRouter();
   const loginUser = useAuthContext();
 
-  const login = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(firebaseAuth, provider);
-      router.push("/home");
-    } catch (error) {
-      console.log(error);
-      // TODO: エラーメッセージをトーストで表示
-      router.push("/");
-    }
+  const login = () => {
+    router.push("/login");
   };
 
   const logout = async () => {
     try {
       await signOut(firebaseAuth);
+      router.push("/");
     } catch (error) {
       console.log(error);
       // TODO: エラーメッセージをトーストで表示
@@ -39,19 +32,21 @@ export const LoginLogout = () => {
     }
   };
 
-  return (
-    <>
-      {loginUser === undefined ? null : loginUser === null ? (
-        <button onClick={() => login()} className="flex items-center gap-1">
-          Login
-          <IoLogInOutline size={25} />
-        </button>
-      ) : (
-        <button onClick={logout} className="flex items-center gap-1">
-          Logout
-          <IoLogOutOutline size={25} />
-        </button>
-      )}
-    </>
-  );
+  if (loginUser === undefined) return null;
+
+  if (loginUser === null) {
+    return (
+      <button onClick={login} className="flex items-center gap-1">
+        Login
+        <IoLogInOutline size={25} />
+      </button>
+    );
+  } else {
+    return (
+      <button onClick={logout} className="flex items-center gap-1">
+        Logout
+        <IoLogOutOutline size={25} />
+      </button>
+    );
+  }
 };

@@ -50,7 +50,7 @@ export const AuthContextProvider = ({
               email: currentUser.email!,
               createdAt: Date.now(),
             };
-            setDoc(ref, user);
+            await setDoc(ref, user);
             setLoginUser(user);
           } else {
             // ユーザーをセット
