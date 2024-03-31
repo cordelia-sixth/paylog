@@ -6,6 +6,9 @@ import { useAuthContext } from "../provider/AuthProvider";
 import Link from "next/link";
 import Image from "next/image";
 
+/**
+ * ヘッダーコンポーネント
+ */
 export const Header = () => {
   const user = useAuthContext();
 

@@ -9,7 +9,7 @@ import { useAuthContext } from "../_layout/provider/AuthProvider";
 /**
  * ログインページ
  */
-export const Page = () => {
+const Page = () => {
   const router = useRouter();
   const loginUser = useAuthContext();
 

@@ -7,32 +7,30 @@ import { IoLogInOutline } from "react-icons/io5";
 import { IoLogOutOutline } from "react-icons/io5";
 import { firebaseAuth } from "@/lib/firebase/client";
 import { useAuthContext } from "../provider/AuthProvider";
+import { MouseEvent } from "react";
 
 /**
  * ログイン・ログアウトボタンを表示するコンポーネント
- * @returns button
  */
 export const LoginLogout = () => {
   const router = useRouter();
   const loginUser = useAuthContext();
 
-  const login = () => {
+  const login = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     router.push("/login");
   };
 
-  const logout = async () => {
-    try {
-      await signOut(firebaseAuth);
-      router.push("/");
-    } catch (error) {
+  const logout = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    await signOut(firebaseAuth).catch((error) => {
       console.log(error);
-      // TODO: エラーメッセージをトーストで表示
-    } finally {
-      router.push("/");
-    }
+    });
   };
 
-  if (loginUser === undefined) return null;
+  if (loginUser === undefined) {
+    return null;
+  }
 
   if (loginUser === null) {
     return (

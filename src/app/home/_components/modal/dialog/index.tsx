@@ -23,20 +23,10 @@ export const useDialog = (): Result => {
     setIsOpen(true);
   }, []);
 
-  // ダイアログを開く関数
-  // const handleOpen = () => {
-  //   setIsOpen(true);
-  // };
-
   // ダイアログを閉じる関数
   const handleClose = useCallback(() => {
     setIsOpen(false);
   }, []);
-
-  // ダイアログを閉じる関数
-  // const handleClose = () => {
-  //   setIsOpen(false);
-  // };
 
   const Dialog: React.FC<DialogProps> = useCallback(
     (props: DialogProps) => (
@@ -44,11 +34,6 @@ export const useDialog = (): Result => {
     ),
     [handleClose, isOpen],
   );
-
-  // ダイアログ要素
-  // const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
-  //   return <Component isOpen={isOpen} onClose={handleClose} {...props} />;
-  // };
 
   return {
     /** ダイアログを開く関数 */

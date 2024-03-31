@@ -23,6 +23,9 @@ export type Item = {
   userId: string;
 };
 
+/**
+ * ログイン後のトップページ
+ */
 const Page = () => {
   const router = useRouter();
   const loginUser = useAuthContext();
@@ -42,19 +45,14 @@ const Page = () => {
       (snapshot) => {
         let items: Item[] = [];
         snapshot.forEach((doc) => {
-          // const { name, price, createdAt } = doc.data();
           items.push({
             ...(doc.data() as Item),
             id: doc.id,
-            // name,
-            // price,
-            // createdAt,
           });
         });
         setItemList(items);
       },
       (error) => {
-        // TODO: エラーメッセージをユーザーに表示する。
         console.log("onSnapshot error", error);
       },
     );
@@ -62,7 +60,10 @@ const Page = () => {
     return () => unsubscribe();
   }, [loginUser]);
 
-  if (!loginUser) return null;
+  if (!loginUser) {
+    return null;
+  }
+
   if (itemList === undefined) {
     return null;
   } else {

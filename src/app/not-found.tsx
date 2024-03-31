@@ -1,25 +1,13 @@
-"use client";
+import Link from "next/link";
 
-import { useRouter } from "next/navigation";
-import { useAuthContext } from "./_layout/provider/AuthProvider";
-
-const NotFount = () => {
-  const router = useRouter();
-  const loginUser = useAuthContext();
-
-  if (loginUser) {
-    router.push("/home");
-  } else {
-    router.push("/");
-  }
-
+const NotFound = () => {
   return (
     <div>
       <p>お探しのページは見つかりませんでした。</p>
       <p>URLが間違っているか、削除された可能性があります。</p>
-      <p>ページを移動します。</p>
+      <Link href="/home">ページを移動する。</Link>
     </div>
   );
 };
 
-export default NotFount;
+export default NotFound;

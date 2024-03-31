@@ -10,6 +10,8 @@ export const formatPrice = (price: number): string =>
 
 /**
  * 日時を日本時間に修正する
+ * @param target 日時
+ * @return 「2014.3.31」形式の日時
  */
 export const formatTime = (target: number): string => {
   const date = new Date(target);

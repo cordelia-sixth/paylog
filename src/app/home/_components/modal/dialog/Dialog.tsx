@@ -57,11 +57,6 @@ export const Dialog: React.FC<DialogProps> = ({
     onClose();
   }, [onClose]);
 
-  // ダイアログを閉じる関数
-  // const handleClickDialog = () => {
-  //   onClose();
-  // };
-
   const handleClickContent = useCallback(
     (event: MouseEvent<HTMLDivElement>) => {
       // ダイアログ領域のイベント伝播を防ぐ
@@ -70,18 +65,12 @@ export const Dialog: React.FC<DialogProps> = ({
     [],
   );
 
-  // ダイアログウィンドウ内領域をクリックした時のハンドラー
-  // const handleClickContent = (event: MouseEvent<HTMLDivElement>) => {
-  //   // イベントを伝播を防ぐ
-  //   event.stopPropagation();
-  // };
-
   return (
     <RemoveScroll removeScrollBar enabled={isOpen}>
       <dialog
         ref={dialogRef}
         onClick={handleClickDialog}
-        className="w-[60%] rounded-md"
+        className="w-3/5 rounded-md"
       >
         <div onClick={handleClickContent}>{children}</div>
       </dialog>

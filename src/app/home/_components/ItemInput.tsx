@@ -8,17 +8,17 @@ import { useAuthContext } from "@/app/_layout/provider/AuthProvider";
  * 購入物と金額を入力するコンポーネント
  */
 export const ItemInput = () => {
-  // TODO: ここ型付できない？
-  const initState = { name: "", price: "", createdAt: 0 };
-  const [item, setItem] = useState(initState);
   const loginUser = useAuthContext();
+  const initState = { name: "", price: "" };
+  const [inputItem, setInputItem] = useState(initState);
   const focusElm = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault();
+
     const key = e.currentTarget.name;
     const value = e.currentTarget.value.trim();
-    setItem((prev) => ({
+    setInputItem((prev) => ({
       ...prev,
       [key]: value,
     }));
@@ -26,15 +26,17 @@ export const ItemInput = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    if (item.name !== "" && item.price !== "") {
+
+    // TODO: zod, useFormState, useFormStatusを使う
+    if (inputItem.name !== "" && inputItem.price !== "") {
       await addDoc(collection(firebaseStore, `users/${loginUser?.id}/items/`), {
-        ...item,
+        ...inputItem,
         createdAt: Date.now(),
         userId: loginUser?.id,
       });
-      setItem(initState);
-      focusElm.current?.focus();
     }
+    setInputItem(initState);
+    focusElm.current?.focus();
   };
 
   return (
@@ -45,23 +47,22 @@ export const ItemInput = () => {
       <input
         type="text"
         name="name"
-        value={item.name}
+        value={inputItem.name}
         placeholder="買い物"
         className="col-span-4 h-[88%] rounded-md bg-slate-100 p-3 shadow-custom focus:outline-none focus:ring-4 focus:ring-red-600"
         onChange={handleChange}
         ref={focusElm}
-        maxLength={20}
+        maxLength={15}
         required
       />
       <input
         type="number"
         name="price"
-        value={item.price}
+        value={inputItem.price}
         placeholder="金額"
         className="col-span-3 h-[88%] rounded-md bg-slate-100 p-3 shadow-custom focus:outline-none focus:ring-4 focus:ring-red-600"
         onChange={handleChange}
-        min={1}
-        max={99999999}
+        max={1000000}
         required
       />
       <button
