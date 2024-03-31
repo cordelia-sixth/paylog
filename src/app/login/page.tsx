@@ -4,7 +4,6 @@ import { firebaseAuth } from "@/lib/firebase/client";
 import {
   GoogleAuthProvider,
   getRedirectResult,
-  signInWithPopup,
   signInWithRedirect,
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
@@ -28,18 +27,14 @@ const Page = () => {
 
     const provider = new GoogleAuthProvider();
 
+    // TODO: エラーハンドリングを見直す
     try {
-      // await signInWithPopup(firebaseAuth, provider);
-      // const result = await signInWithPopup(firebaseAuth, provider);
       await signInWithRedirect(firebaseAuth, provider);
       const result = await getRedirectResult(firebaseAuth);
       if (result) {
-        // This is the signed-in user
         router.push("/home");
       }
     } catch (error) {
-      // console.log(error);
-      alert(error);
       router.push("/");
     }
   };
