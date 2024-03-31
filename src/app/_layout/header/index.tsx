@@ -1,13 +1,41 @@
-import Link from "next/link";
-import { LoginLogout } from "./LoginLogout";
+"use client";
 
+import { LoginLogout } from "./LoginLogout";
+import { FaCoins } from "react-icons/fa6";
+import { useAuthContext } from "../provider/AuthProvider";
+import Link from "next/link";
+import Image from "next/image";
+
+/**
+ * ヘッダーコンポーネント
+ */
 export const Header = () => {
+  const user = useAuthContext();
+
   return (
-    <header className="border-b border-b-slate-200 p-4">
-      <div className="mx-auto flex w-full justify-between sm:w-[640px]">
-        <Link href="/">PayLog</Link>
-        <LoginLogout />
-      </div>
+    <header className="flex items-center justify-between py-5">
+      {!user ? (
+        <Link
+          href="/"
+          className="flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1 text-white"
+        >
+          Pay
+          <FaCoins size={18} />
+          Log
+        </Link>
+      ) : user === undefined ? null : (
+        <div className="flex items-center gap-2">
+          <Image
+            src={user.photoUrl}
+            width={30}
+            height={30}
+            alt="user's avator"
+            className="rounded-full"
+          />
+          {user.name}
+        </div>
+      )}
+      <LoginLogout />
     </header>
   );
 };
