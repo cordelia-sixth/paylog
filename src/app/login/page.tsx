@@ -1,10 +1,16 @@
 "use client";
 
 import { firebaseAuth } from "@/lib/firebase/client";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  getRedirectResult,
+  signInWithPopup,
+  signInWithRedirect,
+} from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { useAuthContext } from "../_layout/provider/AuthProvider";
+import { MouseEvent } from "react";
 
 /**
  * ログインページ
@@ -17,13 +23,23 @@ const Page = () => {
     router.push("/home");
   }
 
-  const onClick = async () => {
+  const onClick = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
     const provider = new GoogleAuthProvider();
+
     try {
-      await signInWithPopup(firebaseAuth, provider);
-      router.push("/home");
+      // await signInWithPopup(firebaseAuth, provider);
+      // const result = await signInWithPopup(firebaseAuth, provider);
+      await signInWithRedirect(firebaseAuth, provider);
+      const result = await getRedirectResult(firebaseAuth);
+      if (result) {
+        // This is the signed-in user
+        router.push("/home");
+      }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      alert(error);
       router.push("/");
     }
   };
