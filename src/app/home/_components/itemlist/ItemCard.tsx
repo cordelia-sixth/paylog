@@ -24,7 +24,7 @@ export const ItemCard = memo(({ id, name, price, createdAt, userId }: Item) => {
     await deleteDoc(doc(firebaseStore, `users/${userId}/items/`, id));
   };
 
-  // daialog
+  // 編集ダイアログ
   const handleUpdate = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await updateDoc(doc(firebaseStore, `users/${userId}/items/`, id), {
@@ -35,6 +35,7 @@ export const ItemCard = memo(({ id, name, price, createdAt, userId }: Item) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+
     const key = e.currentTarget.name;
     const value = e.currentTarget.value.trim();
     setItem((prev) => ({
