@@ -1,5 +1,9 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import {
+  browserSessionPersistence,
+  getAuth,
+  setPersistence,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -13,4 +17,12 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const firebaseAuth = getAuth(app);
+
+// 初期設定
+setPersistence(firebaseAuth, browserSessionPersistence).catch((error) => {
+  console.log(
+    `Firebase Authの初期化に失敗しました。${error.code}:${error.message}`,
+  );
+});
+
 export const firebaseStore = getFirestore(app);

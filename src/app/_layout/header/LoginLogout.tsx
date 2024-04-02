@@ -28,9 +28,11 @@ export const LoginLogout = () => {
     });
   };
 
-  if (loginUser === undefined) {
-    return null;
-  }
+  console.log(loginUser);
+
+  // if (loginUser === undefined) {
+  //   return null;
+  // }
 
   if (loginUser === null) {
     return (
