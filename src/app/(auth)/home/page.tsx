@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { ItemInput } from "./_components/ItemInput";
 import { ItemList } from "./_components/itemlist";
 import { Total } from "./_components/Total";
-import { StyleComponent } from "../_layout/StyleComponent";
+import { StyleComponent } from "../../_layout/StyleComponent";
 import { firebaseStore } from "@/lib/firebase/client";
-import { useAuthContext } from "../_layout/provider/AuthProvider";
+import { useAuthContext } from "../../_layout/provider/AuthProvider";
 import { useRouter } from "next/navigation";
 
 export type Item = {

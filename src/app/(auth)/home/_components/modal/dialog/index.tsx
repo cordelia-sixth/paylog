@@ -1,4 +1,4 @@
-import { Dialog as Component } from "@/app/home/_components/modal/dialog/Dialog";
+import { Dialog as Component } from "@/app/(auth)/home/_components/modal/dialog/Dialog";
 import { ComponentProps, useCallback, useState } from "react";
 
 // ダイアログ要素が受け取るpropsの型

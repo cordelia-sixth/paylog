@@ -28,13 +28,7 @@ export const LoginLogout = () => {
     });
   };
 
-  console.log(loginUser);
-
-  // if (loginUser === undefined) {
-  //   return null;
-  // }
-
-  if (loginUser === null) {
+  if (loginUser === undefined || loginUser === null) {
     return (
       <button onClick={login} className="flex items-center gap-1">
         Login

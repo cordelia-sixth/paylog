@@ -1,15 +1,12 @@
 "use client";
 
-import { firebaseAuth } from "@/lib/firebase/client";
-import {
-  GoogleAuthProvider,
-  getRedirectResult,
-  signInWithRedirect,
-} from "firebase/auth";
+import { firebaseAuth, firebaseStore } from "@/lib/firebase/client";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { useAuthContext } from "../_layout/provider/AuthProvider";
 import { MouseEvent } from "react";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 /**
  * ログインページ
@@ -24,19 +21,30 @@ const Page = () => {
 
   const onClick = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-
     const provider = new GoogleAuthProvider();
 
-    // TODO: エラーハンドリングを見直す
-    try {
-      await signInWithRedirect(firebaseAuth, provider);
-      const result = await getRedirectResult(firebaseAuth);
-      if (result) {
+    // TODO: エラーの時ユーザーにメッセージを表示する
+    await signInWithPopup(firebaseAuth, provider)
+      .then(async (result) => {
+        // 登録済みのユーザーか確認
+        const ref = doc(firebaseStore, `users/${result.user.uid}`);
+        const snap = await getDoc(ref);
+        if (!snap.exists()) {
+          const user = {
+            id: result.user.uid,
+            name: result.user.displayName!,
+            photoUrl: result.user.photoURL!,
+            email: result.user.email!,
+            createdAt: Date.now(),
+          };
+          await setDoc(ref, user);
+        }
+
         router.push("/home");
-      }
-    } catch (error) {
-      router.push("/");
-    }
+      })
+      .catch((error) => {
+        console.log(`ログインに失敗しました。${error.code}:${error.message}`);
+      });
   };
 
   if (loginUser) {
