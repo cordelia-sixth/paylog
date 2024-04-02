@@ -10,7 +10,12 @@ export const Footer = () => {
         <FaCoins />
         Log
       </p>
-      <Link href="https://cordelia.dev" className="flex items-center gap-1">
+      <Link
+        href="https://cordelia.dev"
+        rel="noopener noreferrer"
+        target="_blank"
+        className="flex items-center gap-1"
+      >
         Created by
         <Image
           src="/myicon.png"
