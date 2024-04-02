@@ -14,7 +14,7 @@ export const Header = () => {
 
   return (
     <header className="flex items-center justify-between py-5">
-      {!user ? (
+      {user === undefined ? null : user === null ? (
         <Link
           href="/"
           className="flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1 text-white"
@@ -23,19 +23,21 @@ export const Header = () => {
           <FaCoins size={18} />
           Log
         </Link>
-      ) : user === undefined ? null : (
-        <div className="flex items-center gap-2">
-          <Image
-            src={user.photoUrl}
-            width={30}
-            height={30}
-            alt="user's avator"
-            className="rounded-full"
-          />
-          {user.name}
-        </div>
+      ) : (
+        <>
+          <div className="flex items-center gap-2">
+            <Image
+              src={user.photoUrl}
+              width={30}
+              height={30}
+              alt="user's avator"
+              className="rounded-full"
+            />
+            {user.name}
+          </div>
+          <LoginLogout />
+        </>
       )}
-      <LoginLogout />
     </header>
   );
 };
