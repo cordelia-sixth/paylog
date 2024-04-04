@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+/**
+ * 404
+ */
 const NotFound = () => {
   return (
     <div className="flex flex-col gap-3">

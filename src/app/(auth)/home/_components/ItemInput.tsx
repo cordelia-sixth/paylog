@@ -5,6 +5,10 @@ import { IoIosAdd } from "react-icons/io";
 import { useAuthContext } from "@/app/_layout/provider/AuthProvider";
 
 /**
+ * TODO: zodでバリデートする
+ */
+
+/**
  * 購入物と金額を入力するコンポーネント
  */
 export const ItemInput = () => {

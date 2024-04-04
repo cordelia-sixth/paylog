@@ -2,6 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaCoins } from "react-icons/fa6";
 
+/**
+ * フッターコンポーネント
+ */
 export const Footer = () => {
   return (
     <footer className="flex items-start justify-between py-5">

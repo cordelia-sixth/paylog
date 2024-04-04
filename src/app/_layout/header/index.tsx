@@ -8,6 +8,10 @@ import { Login } from "./Login";
 import { Logout } from "./Logout";
 
 /**
+ * TODO: 表示が遅い時があるので要調査
+ */
+
+/**
  * ヘッダーコンポーネント
  */
 export const Header = () => {

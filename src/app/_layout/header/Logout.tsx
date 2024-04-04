@@ -3,6 +3,9 @@ import { signOut } from "firebase/auth";
 import { MouseEvent } from "react";
 import { IoLogOutOutline } from "react-icons/io5";
 
+/**
+ * ログアウトボタン
+ */
 export const Logout = () => {
   const logout = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();

@@ -4,6 +4,9 @@ import { useRouter } from "next/navigation";
 import { IoLogInOutline } from "react-icons/io5";
 import { MouseEvent } from "react";
 
+/**
+ * ログインボタン
+ */
 export const Login = () => {
   const router = useRouter();
 
