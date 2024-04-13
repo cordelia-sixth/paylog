@@ -1,8 +1,8 @@
 "use client";
 
+import { ItemCard } from "@/app/(auth)/home/_components/itemlist/ItemCard";
+import { Item } from "@/app/(auth)/home/page";
 import { useAuthContext } from "@/app/_layout/provider/AuthProvider";
-import { Item } from "../../page";
-import { ItemCard } from "./ItemCard";
 
 /**
  * アイテムを表示するコンポーネント

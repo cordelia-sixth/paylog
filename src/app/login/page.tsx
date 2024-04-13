@@ -4,9 +4,10 @@ import { firebaseAuth, firebaseStore } from "@/lib/firebase/client";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
-import { useAuthContext } from "../_layout/provider/AuthProvider";
+
 import { MouseEvent } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useAuthContext } from "@/app/_layout/provider/AuthProvider";
 
 /**
  * ログインページ

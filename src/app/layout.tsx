@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import { Footer } from "./_layout/footer";
-import { Header } from "./_layout/header";
-import { Container } from "./_layout/container";
-
-import { Main } from "./_layout/Main";
-import { AuthContextProvider } from "./_layout/provider/AuthProvider";
+import "@/app/globals.css";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/constants/site";
+import { AuthContextProvider } from "@/app/_layout/provider/AuthProvider";
+
+import { Header } from "@/app/_layout/header";
+import { Main } from "@/app/_layout/Main";
+import { Footer } from "@/app/_layout/footer";
+import { Container } from "@/app/_layout/container";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

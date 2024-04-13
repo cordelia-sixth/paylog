@@ -1,14 +1,14 @@
 "use client";
 
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { ItemInput } from "./_components/ItemInput";
-import { ItemList } from "./_components/itemlist";
-import { Total } from "./_components/Total";
-import { StyleComponent } from "../../_layout/StyleComponent";
+import { ItemInput } from "@/app/(auth)/home/_components/ItemInput";
+import { Total } from "@/app/(auth)/home/_components/Total";
+import { ItemList } from "@/app/(auth)/home/_components/itemlist";
+import { StyleComponent } from "@/app/_layout/StyleComponent";
+import { useAuthContext } from "@/app/_layout/provider/AuthProvider";
 import { firebaseStore } from "@/lib/firebase/client";
-import { useAuthContext } from "../../_layout/provider/AuthProvider";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export type Item = {
   /** アイテムID */

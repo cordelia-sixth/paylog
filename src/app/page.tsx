@@ -1,7 +1,8 @@
 "use client";
 
+import { useAuthContext } from "@/app/_layout/provider/AuthProvider";
 import { useRouter } from "next/navigation";
-import { useAuthContext } from "./_layout/provider/AuthProvider";
+
 import { FaCircleInfo } from "react-icons/fa6";
 
 /**

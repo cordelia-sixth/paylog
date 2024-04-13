@@ -3,5 +3,8 @@
     "next/core-web-vitals",
     "plugin:tailwindcss/recommended",
     "prettier"
-  ]
+  ],
+  "rules": {
+    "no-restricted-imports": ["error", { "patterns": ["./", "../"] }]
+  }
 }

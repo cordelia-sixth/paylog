@@ -1,12 +1,13 @@
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { Item } from "../../page";
-import { formatPrice, formatTime } from "../utils";
+
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { TiDelete } from "react-icons/ti";
 import { firebaseStore } from "@/lib/firebase/client";
 import { FormEvent, memo, useRef, useState } from "react";
-import { useDialog } from "../modal/dialog";
+import { Item } from "@/app/(auth)/home/page";
+import { useDialog } from "@/app/(auth)/home/_components/modal/dialog";
+import { formatPrice, formatTime } from "@/app/(auth)/home/_components/utils";
 
 /**
  * アイテム情報を受け取って表示するコンポーネント

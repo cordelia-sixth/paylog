@@ -17,6 +17,7 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
@@ -25,8 +26,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/app/(auth)/home/layout.tsx"
+    ".next/types/**/*.ts"
+    // "src/app/(auth)/home/layout.tsx"
   ],
   "exclude": ["node_modules"]
 }

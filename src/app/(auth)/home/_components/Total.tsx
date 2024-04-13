@@ -1,5 +1,5 @@
-import { Item } from "../page";
-import { formatPrice } from "./utils";
+import { formatPrice } from "@/app/(auth)/home/_components/utils";
+import { Item } from "@/app/(auth)/home/page";
 
 /**
  * 金額の合計を計算して表示するコンポーネント

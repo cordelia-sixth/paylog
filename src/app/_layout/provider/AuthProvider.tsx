@@ -1,9 +1,10 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { LoginUser } from "./type";
+
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth, firebaseStore } from "@/lib/firebase/client";
+import { LoginUser } from "@/app/_layout/provider/type";
 
 /** contextの型 */
 export type AuthContextType =

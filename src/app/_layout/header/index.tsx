@@ -1,11 +1,12 @@
 "use client";
 
 import { FaCoins } from "react-icons/fa6";
-import { useAuthContext } from "../provider/AuthProvider";
+
 import Link from "next/link";
 import Image from "next/image";
-import { Login } from "./Login";
-import { Logout } from "./Logout";
+import { useAuthContext } from "@/app/_layout/provider/AuthProvider";
+import { Login } from "@/app/_layout/header/Login";
+import { Logout } from "@/app/_layout/header/Logout";
 
 /**
  * TODO: 表示が遅い時があるので要調査
